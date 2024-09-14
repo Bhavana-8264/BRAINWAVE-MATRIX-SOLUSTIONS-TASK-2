@@ -1,0 +1,119 @@
+class Product:
+    def __init__(self, name, quantity, price):
+        self.name = name
+        self.quantity = quantity
+        self.price = price
+
+
+class Inventory:
+    def __init__(self):
+        self.products = {}
+
+    def add_product(self, name, quantity, price):
+        if name in self.products:
+            print("Product already exists.")
+        else:
+            self.products[name] = Product(name, quantity, price)
+            print("Product added successfully.")
+
+    def edit_product(self, name, quantity=None, price=None):
+        if name in self.products:
+            if quantity is not None:
+                self.products[name].quantity = quantity
+            if price is not None:
+                self.products[name].price = price
+            print("Product updated successfully.")
+        else:
+            print("Product not found.")
+
+    def delete_product(self, name):
+        if name in self.products:
+            del self.products[name]
+            print("Product deleted successfully.")
+        else:
+            print("Product not found.")
+
+    def check_availability(self, name):
+        if name in self.products:
+            print(f"Quantity: {self.products[name].quantity}")
+        else:
+            print("Product not found.")
+
+    def display_inventory(self):
+        for product in self.products.values():
+            print(f"Name: {product.name}, Quantity: {product.quantity}, Price: {product.price}")
+
+
+def main():
+    inventory = Inventory()
+
+    while True:
+        print("\n1. Add Product")
+        print("2. Edit Product")
+        print("3. Delete Product")
+        print("4. Check Availability")
+        print("5. Display Inventory")
+        print("6. Exit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            name = input("Enter product name: ")
+            quantity = int(input("Enter quantity: "))
+            price = float(input("Enter price: "))
+            inventory.add_product(name, quantity, price)
+        elif choice == "2":
+            name = input("Enter product name: ")
+            quantity = input("Enter new quantity (press enter to skip): ")
+            price = input("Enter new price (press enter to skip): ")
+            quantity = int(quantity) if quantity else None
+            price = float(price) if price else None
+            inventory.edit_product(name, quantity, price)
+        elif choice == "3":
+            name = input("Enter product name: ")
+            inventory.delete_product(name)
+        elif choice == "4":
+            name = input("Enter product name: ")
+            inventory.check_availability(name)
+        elif choice == "5":
+            inventory.display_inventory()
+        elif choice == "6":
+            break
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
+
+if __name__ == "__main__":
+    main()
+
+Output:
+
+1. Add Product
+2. Edit Product
+3. Delete Product
+4. Check Availability
+5. Display Inventory
+6. Exit
+Choose an option: 1
+Enter product name: pen
+Enter quantity: 10
+Enter price: 3.5
+Product added successfully.
+
+1. Add Product
+2. Edit Product
+3. Delete Product
+4. Check Availability
+5. Display Inventory
+6. Exit
+Choose an option: 5
+Name: pen, Quantity: 10, Price: 3.5
+
+1. Add Product
+2. Edit Product
+3. Delete Product
+4. Check Availability
+5. Display Inventory
+6. Exit
+Choose an option: 6
+​
